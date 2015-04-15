@@ -1,0 +1,17 @@
+---
+- yum: name={{item}} state=present
+  with_items:
+  - pcre-devel
+  - openssl-devel
+  - zlib-devel
+- pip: name=uwsgi state=present
+
+- template: src=uwsgi.tempfiles.conf
+            dest=/etc/tmpfiles.d/uwsgi.conf
+            mode=0644 owner=root group=root
+
+- template: src=uwsgi.service
+            dest=/etc/systemd/system/uwsgi.service
+            mode=0644 owner=root group=root
+
+- service: name=uwsgi enabled=yes

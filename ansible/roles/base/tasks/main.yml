@@ -1,0 +1,6 @@
+---
+- include: epel.yml
+- include: selinux.yml
+- include: devel.yml
+- include: awscli.yml
+- include: user.yml

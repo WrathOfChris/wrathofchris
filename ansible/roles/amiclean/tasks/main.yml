@@ -1,0 +1,13 @@
+---
+- include: sync.yml
+
+# remove key(s) installed during build
+#
+# NOTE: THIS MUST BE THE FINAL STEP
+- get_url: url="http://169.254.169.254/latest/meta-data/public-keys/0/openssh-key/"
+           dest=/tmp/remove_authorized_key
+           owner={{site.base_user}} group={{site.base_user}} mode=0600
+- shell: cat /tmp/remove_authorized_key
+  register: boot_key
+- file: dest=/tmp/remove_authorized_key state=absent
+- authorized_key: user={{site.base_user}} state=absent key="{{boot_key.stdout}}"

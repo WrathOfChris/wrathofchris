@@ -1,0 +1,15 @@
+---
+- pip: name=awscli state=latest
+- file: dest=/home/centos/.aws
+        mode=0755 owner=centos group=centos state=directory
+- template: src=awscli-config dest=/home/centos/.aws/config
+- lineinfile:
+    dest:   "/home/{{item}}/.bash_completion"
+    regexp: "^complete -C aws_completer aws"
+    line:   "complete -C aws_completer aws"
+    create: yes
+    owner:  "{{item}}"
+    group:  "{{item}}"
+    mode:   0644
+  with_items:
+  - centos

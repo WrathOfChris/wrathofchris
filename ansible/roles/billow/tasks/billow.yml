@@ -1,0 +1,31 @@
+---
+- pip: name={{item}} state=present
+  with_items:
+  - flask
+  - jinja2
+
+- pip: name=boto state=latest
+
+- file: dest=/opt/billow-web mode=0755 owner=centos group=centos state=directory
+
+- git: repo=https://github.com/WrathOfChris/billow.git
+       dest=/var/tmp/billow accept_hostkey=yes
+  sudo_user: centos
+- command: python setup.py install chdir=/var/tmp/billow
+
+- git: repo=https://github.com/WrathOfChris/billow-web.git
+       dest=/var/tmp/billow-web accept_hostkey=yes
+  sudo_user: centos
+- shell: cp -r /var/tmp/billow-web/* /opt/billow-web/
+
+- template: src=billow-web.yaml
+            dest=/opt/billow-web/billow-web.yaml
+            mode=0644 owner=centos group=centos
+
+- template: src=uwsgi.billow-web.ini
+            dest=/etc/nginx/uwsgi.ini
+            mode=0644 owner=root group=root
+
+- template: src=nginx.billow-web.conf
+            dest=/etc/nginx/conf.d/billow-web.conf
+            mode=0644 owner=root group=root

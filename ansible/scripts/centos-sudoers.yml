@@ -1,0 +1,7 @@
+#cloud-config
+#
+# This should all be added to a openstack image
+#  - Disable 'requiretty' in the sudo config - vagrant wants to run sudo over
+#    ssh, and there's no way to add the '-t' flag
+runcmd:
+  - sed -i -e 's/^Defaults\s\+requiretty/# \0/' /etc/sudoers

@@ -1,0 +1,9 @@
+---
+- yum: name={{item}} state=present
+  with_items:
+  - python-pip
+  - python-devel
+
+- yum: name={{item}} state=present
+  with_items:
+  - gcc

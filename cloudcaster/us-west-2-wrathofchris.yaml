@@ -1,0 +1,37 @@
+aws:
+  continent: us1
+  env: prod
+  envtag: env
+  privnet: 172.16.0.0/12
+  provider: ec2
+  region: us-west-2
+  svctag: service
+  zone: wrathofchris.com.
+
+vpc:
+  name: prod
+  azs: [us-west-2a, us-west-2b, us-west-2c]
+  cidr: 172.30.0.0/22
+  pubsubnets: [172.30.0.0/26, 172.30.0.64/26, 172.30.0.128/26]
+  subnets: [172.30.1.0/26, 172.30.1.64/26, 172.30.1.128/26]
+
+elbs: []
+apps:
+- name: wrathofchris
+  group: wrathofchris-prod
+  aminame: billow
+  svctag: wrathofchris
+  cluster: wrathofchris
+  allow: []
+  keypair: wrathofchris-201404
+  name: wrathofchris
+  ports: []
+  pubports:
+  - {from: 443, prot: tcp, to: 443}
+  - {from: 80, prot: tcp, to: 80}
+  public: 'yes'
+  role: discovery
+  type: t2.micro
+  count: 1
+  autoscale: {max: 2, min: 1}
+  addrs: [54.191.14.152]

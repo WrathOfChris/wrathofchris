@@ -1,0 +1,12 @@
+---
+# force a filesystem sync before running the snapshot
+- shell: /bin/sync
+- shell: /bin/sleep 2
+- shell: /bin/sync
+- shell: /bin/sleep 2
+- shell: /bin/sync
+- shell: /bin/sleep 2
+- shell: /bin/sync
+- shell: /bin/sleep 2
+- shell: /bin/sync
+- shell: /bin/sleep 2

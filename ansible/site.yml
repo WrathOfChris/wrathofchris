@@ -1,0 +1,11 @@
+---
+
+- name: billow
+  hosts: tag_amibuilder_billow
+  tags:
+  - billow
+  roles:
+  - base
+  - billow
+  user: "{{site.base_user}}"
+  sudo: true
