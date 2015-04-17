@@ -15,10 +15,23 @@ vpc:
   pubsubnets: [172.30.0.0/26, 172.30.0.64/26, 172.30.0.128/26]
   subnets: [172.30.1.0/26, 172.30.1.64/26, 172.30.1.128/26]
 
-elbs: []
+elbs:
+- name: wrathofchris
+  group: wrathofchris-elb-prod
+  listeners:
+  - {from: 80, from_prot: http, to: 80, to_prot: http}
+  ports:
+  - {from: 80, prot: tcp, to: 80}
+  - {from: 443, prot: tcp, to: 443}
+  unhealthy: 10
+  healthy: 2
+  interval: 12
+  target: TCP:80
+
 apps:
 - name: wrathofchris
   group: wrathofchris-prod
+  elb: wrathofchris
   aminame: billow
   svctag: wrathofchris
   cluster: wrathofchris
