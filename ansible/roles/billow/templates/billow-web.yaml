@@ -5,3 +5,5 @@ urls:
 links:
   - { 'name': 'Prod', 'url': 'http://ops-prod.ec2-us-west-2.us1.wrathofchris.com/billow/' }
 statsurl: 'https://ops-prod.ec2-us-west-2.us1.wrathofchris.com/grafana/#/dashboard/db/instance?var-instance='
+dns:
+ - { 'zone': 'wrathofchris.com' }
