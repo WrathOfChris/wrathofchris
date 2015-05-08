@@ -1,0 +1,17 @@
+---
+vpn_bgp_hostname: vpn-ha
+vpn_bgp_password: password
+vpn_bgp_asn: 65000
+vpn_bgp_eip: 1.1.1.1
+vpn_bgp_tunnel1_net: 169.254.254.80/30
+vpn_bgp_tunnel2_net: 169.254.254.84/30
+vpn_bgp_tunnel1_vpg_int: 169.254.254.81
+vpn_bgp_tunnel2_vpg_int: 169.254.254.85
+vpn_bgp_tunnel1_vpg_ext: 87.238.85.42
+vpn_bgp_tunnel2_vpg_ext: 87.238.85.46
+vpn_bgp_tunnel1_cgw: 169.254.254.82
+vpn_bgp_tunnel2_cgw: 169.254.254.86
+vpn_bgp_tunnel1_psk: "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+vpn_bgp_tunnel2_psk: "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+vpn_bgp_privnet: 172.16.0.0/12
+vpn_bgp_remoteas: 9059

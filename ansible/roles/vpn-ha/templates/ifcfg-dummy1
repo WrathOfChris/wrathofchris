@@ -1,0 +1,10 @@
+DEVICE=dummy1
+BOOTPROTO=none
+ONBOOT=yes
+TYPE=Ethernet
+USERCTL=no
+IPV6INIT=no
+PEERDNS=yes
+NETMASK=255.255.255.252
+IPADDR={{vpn_bgp_tunnel2_cgw}}
+ARP=yes

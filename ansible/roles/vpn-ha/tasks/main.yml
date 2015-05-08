@@ -1,0 +1,43 @@
+---
+- yum: name=openswan state=present
+- template: src=default.conf dest=/etc/ipsec.d/default.conf
+            mode=0644 owner=root group=root
+- template: src=vpcvpn.conf dest=/etc/ipsec.d/vpcvpn.conf
+            mode=0644 owner=root group=root
+- template: src=vpcvpn.secrets dest=/etc/ipsec.d/vpcvpn.secrets
+            mode=0644 owner=root group=root
+- lineinfile: dest=/etc/ipsec.conf
+              regexp="^include /etc/ipsec.d/"
+              line="include /etc/ipsec.d/*.conf"
+- service: name=ipsec enabled=yes
+
+- sysctl: name=net.ipv4.ip_forward value=1
+          sysctl_set=yes state=present reload=yes
+- modprobe: name=dummy state=present params="numdummies=4"
+- copy: content="modprobe dummy" dest=/etc/sysconfig/modules/dummy.modules
+        mode=0755 owner=root group=root
+- copy: content="options dummy numdummies=4"dest=/etc/modprobe.d/dummy.conf
+        mode=0644 owner=root group=root
+- template: src=ifcfg-dummy0 dest=/etc/sysconfig/network-scripts/ifcfg-dummy0
+            mode=0644 owner=root group=root
+- template: src=ifcfg-dummy1 dest=/etc/sysconfig/network-scripts/ifcfg-dummy1
+            mode=0644 owner=root group=root
+
+- yum: name=quagga state=present
+- template: src=bgpd.conf dest=/etc/quagga/bgpd.conf
+            mode=0644 owner=root group=root
+- template: src=zebra.conf dest=/etc/quagga/zebra.conf
+            mode=0644 owner=root group=root
+- service: name=bgpd enabled=yes
+- service: name=zebra enabled=yes
+
+- yum: name=tcpdump state=present
+- yum: name=telnet state=present
+- yum: name=tmux state=present
+
+# net.ipv4.conf.all.accept_redirects = 0
+# net.ipv4.conf.all.send_redirects = 0
+# net.ipv4.conf.default.send_redirects = 0
+# net.ipv4.conf.eth0.send_redirects = 0
+# net.ipv4.conf.default.accept_redirects = 0
+# net.ipv4.conf.eth0.accept_redirects = 0
