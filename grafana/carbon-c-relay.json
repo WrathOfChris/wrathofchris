@@ -69,7 +69,7 @@
           },
           "targets": [
             {
-              "target": "aliasByNode(derivative(carbon.relays.*.metricsReceived), 2)"
+              "target": "aliasByNode(scaleToSeconds(nonNegativeDerivative(carbon.relays.*.metricsReceived), 1), 2)"
             }
           ],
           "aliasColors": {},
@@ -131,7 +131,7 @@
           },
           "targets": [
             {
-              "target": "aliasByNode(derivative(carbon.relays.*.metricsSent), 2)"
+              "target": "aliasByNode(scaleToSeconds(nonNegativeDerivative(carbon.relays.*.metricsSent), 1), 2)"
             }
           ],
           "aliasColors": {},
@@ -263,7 +263,7 @@
           },
           "targets": [
             {
-              "target": "aliasByNode(derivative(carbon.relays.*.metricsDropped), 2)"
+              "target": "aliasByNode(scaleToSeconds(derivative(carbon.relays.*.metricsDropped), 1), 2)"
             }
           ],
           "aliasColors": {},
@@ -333,7 +333,7 @@
           },
           "targets": [
             {
-              "target": "aliasByNode(derivative(carbon.relays.*.destinations.*.sent), 4)"
+              "target": "aliasByNode(scaleToSeconds(nonNegativeDerivative(carbon.relays.*.destinations.*.sent), 1), 4)"
             }
           ],
           "aliasColors": {},
@@ -395,7 +395,7 @@
           },
           "targets": [
             {
-              "target": "aliasByNode(mostDeviant(carbon.relays.*.destinations.*.queued, 6), 2)"
+              "target": "aliasByNode(mostDeviant(carbon.relays.*.destinations.*.queued, 6), 4)"
             }
           ],
           "aliasColors": {},
@@ -520,7 +520,7 @@
           },
           "percentage": false,
           "zerofill": true,
-          "nullPointMode": "null as zero",
+          "nullPointMode": "null",
           "steppedLine": false,
           "tooltip": {
             "value_type": "cumulative",
@@ -528,10 +528,10 @@
           },
           "targets": [
             {
-              "target": "aliasByNode(derivative(sumSeries(carbon.relays.*.metricsReceived)), 3)"
+              "target": "aliasByNode(nonNegativeDerivative(scaleToSeconds(sumSeries(carbon.relays.*.metricsReceived), 1)), 3)"
             },
             {
-              "target": "aliasByNode(derivative(sumSeries(carbon.relays.*.metricsSent)), 3)"
+              "target": "aliasByNode(nonNegativeDerivative(scaleToSeconds(sumSeries(carbon.relays.*.metricsSent), 1)), 3)"
             }
           ],
           "aliasColors": {},
