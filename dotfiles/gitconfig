@@ -1,0 +1,17 @@
+[user]
+	name = WrathOfChris
+	email = chris@wrathofchris.com
+
+#[remote "origin"]
+#    fetch = +refs/heads/*:refs/remotes/origin/*
+#    url = git@github.com:WrathOfChris/wrathofchris.git
+#    fetch = +refs/pull/*/head:refs/remotes/origin/pr/*
+#    # git fetch origin
+#    # git checkout pr/999
+#    # git fetch origin pull/999/head:pr-999
+
+[core]
+	compression = 0
+
+[push]
+    default = simple

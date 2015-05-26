@@ -1,0 +1,19 @@
+Host *
+  ServerAliveInterval 5
+  ControlPath /tmp/.ssh-%u-%r@%h:%p
+  ControlMaster auto
+  PermitLocalCommand yes
+  IdentityFile ~/.ssh/id_rsa
+
+Host *.amazonaws.com
+  CheckHostIP no
+  StrictHostKeyChecking no
+  UserKnownHostsFile /dev/null
+  PermitLocalCommand yes
+
+Host *.wrathofchris.com
+  CheckHostIP no
+  StrictHostKeyChecking no
+  UserKnownHostsFile /dev/null
+  PermitLocalCommand yes
+  ForwardAgent yes

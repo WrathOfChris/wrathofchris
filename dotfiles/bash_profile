@@ -1,0 +1,18 @@
+export EC2_HOME="/usr/local/Cellar/ec2-api-tools/1.7.1.0/libexec"
+export EC2_AMITOOL_HOME="/usr/local/Cellar/ec2-ami-tools/1.5.3/libexec"
+export AWS_AUTO_SCALING_HOME="/usr/local/Cellar/auto-scaling/1.0.61.6/libexec"
+export AWS_CREDENTIAL_FILE=$HOME/.aws-credentials-master
+export JAVA_HOME="$(/usr/libexec/java_home)"
+export PYTHONPATH=/usr/local/lib/python2.7/site-packages
+function parse_aws_user {
+    [ -n "$AWSUSER" ] && echo -e "aws-$AWSUSER:"
+}
+export PS1="\$(parse_aws_user)\u:\w\$ "
+export PATH=$PATH:~/bin
+
+# GO
+# export PATH=$PATH:/usr/local/Cellar/go/1.2/libexec/bin
+export GOPATH=~/code/go
+
+set -o vi
+complete -C aws_completer aws
