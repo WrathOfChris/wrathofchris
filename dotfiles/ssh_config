@@ -5,6 +5,9 @@ Host *
   PermitLocalCommand yes
   IdentityFile ~/.ssh/id_rsa
 
+Host *.github.com
+  ForwardAgent no
+
 Host *.amazonaws.com
   CheckHostIP no
   StrictHostKeyChecking no

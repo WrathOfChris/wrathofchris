@@ -23,6 +23,7 @@ filetype plugin indent on
 set t_Co=16
 syntax on
 set background=dark
+let g:solarized_termcolors=256
 colorscheme solarized
 
 
@@ -59,8 +60,8 @@ set nofoldenable
 "------------------------------------------------------------------------------
 let &colorcolumn=join(range(80,999),",")
 "match  ErrorMsg '\%>79v.\+' " Lines too long
-2match ErrorMsg '\s\+$'     " Trailing whitespace
-3match ErrorMsg '\t'        " Tabs
+match ErrorMsg '\s\+$'     " Trailing whitespace
+2match ErrorMsg '\t'        " Tabs
 
 
 "==============================================================================
