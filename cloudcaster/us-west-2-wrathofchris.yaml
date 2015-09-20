@@ -19,7 +19,7 @@ elbs: []
 apps:
 - name: wrathofchris
   group: wrathofchris-prod
-  aminame: billow
+  aminame: wrathofchris
   svctag: wrathofchris
   cluster: wrathofchris
   allow: []

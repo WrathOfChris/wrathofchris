@@ -1,0 +1,40 @@
+#!/usr/bin/python
+try:
+    import credstash
+except ImportError:
+    module.fail_json(msg="credstash required for this module")
+
+def main():
+    module = AnsibleModule(
+        argument_spec = dict(
+              version = dict(required=False, default='')
+            , table   = dict(required=False, default='credential-store', type='str')
+            , region  = dict(required=False, default='us-east-1', type='str')
+            , unsafe  = dict(choices=BOOLEANS, default=False)
+            )
+        )
+    version = module.params.get('version')
+    table = module.params.get('table')
+    region = module.params.get('region')
+    unsafe = module.params.get('unsafe')
+
+    facts = dict()
+    facts['changed'] = False
+    facts['ansible_facts'] = dict()
+    facts['ansible_facts']['credstash'] = dict()
+
+    # prevent verbose from printing secrets
+    if unsafe == False:
+        facts['verbose_override'] = True
+
+    output = credstash.getAllSecrets(
+		    version=version,
+		    region=region,
+		    table=table)
+    facts['ansible_facts']['credstash'] = output
+
+    module.exit_json(**facts)
+
+# import module snippets
+from ansible.module_utils.basic import *
+main()

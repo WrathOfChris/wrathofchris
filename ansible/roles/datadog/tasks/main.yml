@@ -1,0 +1,5 @@
+---
+- copy: src=datadog.repo dest=/etc/yum.repos.d/
+        owner=root group=root mode=0644
+- yum: name=datadog-agent enablerepo=datadog state=latest
+- service: name=datadog-agent enabled=yes

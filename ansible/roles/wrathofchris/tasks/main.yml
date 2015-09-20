@@ -1,0 +1,58 @@
+---
+- local_action:
+    module: credstash
+    region: "{{region}}"
+  sudo: false
+
+# datadog config
+- template: src=datadog.conf dest=/etc/dd-agent/datadog.conf
+            owner=dd-agent group=root mode=0440
+
+# ssh keys from credstash
+- copy: content="{{credstash.ssh_wrathofchris_201404}}"
+        dest=/home/centos/.ssh/wrathofchris-201404.pem
+        owner=centos group=centos mode=0400
+- copy: content="{{credstash.ssh_wrathofchris_laptop}}"
+        dest=/home/centos/.ssh/id_rsa
+        owner=centos group=centos mode=0400
+
+# dotfiles
+- get_url: url=https://raw.githubusercontent.com/WrathOfChris/wrathofchris/master/dotfiles/{{item}}
+           dest=/home/centos/.{{item}}
+           owner=centos group=centos
+  with_items:
+  - ansible.cfg
+  - bash_profile
+  - boto
+  - gitconfig
+  - vimrc
+- get_url: url=https://raw.githubusercontent.com/WrathOfChris/wrathofchris/master/dotfiles/ssh_config
+           dest=/home/centos/.ssh/config
+           owner=centos group=centos
+
+# aws
+- file: dest=/home/centos/.aws state=directory
+        owner=centos group=centos
+- get_url: url=https://raw.githubusercontent.com/WrathOfChris/wrathofchris/master/dotfiles/aws/config
+           dest=/home/centos/.aws/config
+           owner=centos group=centos
+- copy: content="{{credstash.aws_wrathofchris}}"
+        dest=/home/centos/.aws/user-wrathofchris
+        owner=centos group=centos mode=0400
+
+# vim
+- file: dest=/home/centos/.vim/{{item}} state=directory
+        owner=centos group=centos
+  with_items:
+  - autoload
+  - colors
+- get_url: url=https://raw.githubusercontent.com/WrathOfChris/wrathofchris/master/dotfiles/vim/colors/solarized.vim
+           dest=/home/centos/.vim/colors/solarized.vim
+           owner=centos group=centos
+- get_url: url=https://raw.githubusercontent.com/WrathOfChris/wrathofchris/master/dotfiles/vim/autoload/pathogen.vim
+           dest=/home/centos/.vim/autoload/pathogen.vim
+           owner=centos group=centos
+
+# billow
+- template: src=billow_web.yaml dest=/opt/billow_web/billow-web.yaml
+            owner=centos group=centos mode=0644

@@ -9,3 +9,14 @@
   - billow
   user: "{{site.base_user}}"
   sudo: true
+
+- name: wrathofchris
+  hosts: tag_amibuilder_wrathofchris
+  tags:
+  - wrathofchris
+  roles:
+  - base
+  - billow
+  - wrathofchris
+  user: "{{site.base_user}}"
+  sudo: true
