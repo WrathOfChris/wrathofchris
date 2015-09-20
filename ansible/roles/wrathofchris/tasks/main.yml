@@ -54,5 +54,5 @@
            owner=centos group=centos
 
 # billow
-- template: src=billow_web.yaml dest=/opt/billow_web/billow-web.yaml
+- template: src=billow-web.yaml dest=/opt/billow-web/billow-web.yaml
             owner=centos group=centos mode=0644
